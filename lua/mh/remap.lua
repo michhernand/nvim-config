@@ -22,3 +22,6 @@ vim.keymap.set("n", "<leader>Y", "\"+Y")
 
 vim.keymap.set("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>")
+
+vim.keymap.set("n", "<leader>sv", "<cmd> vsplit<CR>")
+vim.keymap.set("n", "<leader>sh", "<cmd> split<CR>")

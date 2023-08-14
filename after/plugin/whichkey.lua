@@ -53,5 +53,10 @@ wk.register({
        i = { "inline variable" },
        b = { "extract block" },
        g = { "extract blcok to file" },
+   },
+   s = {
+       name = "split",
+       v = "vertical",
+       h = "horizontal",
    }
 }, { prefix = "<leader>"})
