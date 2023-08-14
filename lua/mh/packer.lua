@@ -22,7 +22,7 @@ return require('packer').startup(function(use)
   })
 
   use(
-	  'nvim-treesitter/nvim-treesitter', 
+	  'nvim-treesitter/nvim-treesitter',
 	  {run = ':TSUpdate'}
   )
 
@@ -45,4 +45,49 @@ return require('packer').startup(function(use)
 		  {'L3MON4D3/LuaSnip'},     -- Required
 	  }
   }
+
+  use {
+      'folke/which-key.nvim',
+      config = function()
+          vim.o.timeout = true
+          vim.o.timeoutlen = 300
+          require("which-key").setup {}
+      end
+  }
+
+  use ('christoomey/vim-tmux-navigator')
+
+  use {
+      'numToStr/Comment.nvim',
+      config = function()
+          require('Comment').setup()
+      end
+  }
+
+  use {
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+          'nvim-tree/nvim-web-devicons'
+      }
+  }
+
+  use({
+      "kdheepak/lazygit.nvim",
+      requires = {
+          "nvim-lua/plenary.nvim"
+      }
+  })
+
+  use {
+    "renerocksai/telekasten.nvim",
+    requires = {"nvim-telescope/telescope.nvim"}
+  }
+
+  -- use {
+  --     "ThePrimeagen/refactoring.nvim",
+  --     requires = {
+  --         {"nvim-lua/plenary.nvim"},
+  --         {"nvim-treesitter/nvim-treesitter"},
+  --     }
+  -- }
 end)

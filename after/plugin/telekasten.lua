@@ -1,0 +1,6 @@
+vim.keymap.set("n", "<leader>zz", "<cmd> Telekasten<CR>")
+vim.keymap.set("n", "<leader>zn", "<cmd> Telekasten new_note<CR>")
+vim.keymap.set("n", "<leader>zi", "<cmd> Telekasten insert_link<CR>")
+vim.keymap.set("n", "<leader>zf", "<cmd> Telekasten follow_link<CR>")
+vim.keymap.set("n", "<leader>zv", "<cmd> Telekasten switch_vault<CR>")
+vim.keymap.set("n", "<leader>zx", "<cmd> Telekasten find_notes<CR>")
