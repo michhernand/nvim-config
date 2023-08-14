@@ -83,11 +83,11 @@ return require('packer').startup(function(use)
     requires = {"nvim-telescope/telescope.nvim"}
   }
 
-  -- use {
-  --     "ThePrimeagen/refactoring.nvim",
-  --     requires = {
-  --         {"nvim-lua/plenary.nvim"},
-  --         {"nvim-treesitter/nvim-treesitter"},
-  --     }
-  -- }
+  use {
+      "ThePrimeagen/refactoring.nvim",
+      requires = {
+          {"nvim-lua/plenary.nvim"},
+          {"nvim-treesitter/nvim-treesitter"},
+      }
+  }
 end)
