@@ -1,6 +1,17 @@
 local wk = require("which-key")
 
 wk.register({
+    n = {
+        name = "neorg",
+        w = { "workspace" },
+        r = { "return" },
+        j = {
+            name = "journal",
+            t = "today",
+            y = "yesterday",
+            o = "tomorrow",
+        }
+    },
     f = {
         name = "telescope",
         f = { "find files" },
