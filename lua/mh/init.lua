@@ -11,9 +11,12 @@ require("nvim-tree").setup()
 require("telekasten").setup({
     home = vim.fn.expand("~/zettlekasten"),
     vaults = {
-        -- personal = {
-        --     home = vim.fn.expand("~/brain")
-        -- }
+        qb = {
+            home = vim.fn.expand("~/qb/00_brain")
+        },
+        sai = {
+            home = vim.fn.expand("~/qb/01_studies/sai/00_brain")
+        }
     }
 })
 
