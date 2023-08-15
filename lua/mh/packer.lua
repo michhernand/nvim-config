@@ -92,6 +92,11 @@ return require('packer').startup(function(use)
   }
 
   use {
+      "ThePrimeagen/harpoon",
+      requires = {"nvim-lua/plenary.nvim"}
+  }
+
+  use {
     "nvim-neorg/neorg",
     config = function()
         require('neorg').setup {
@@ -102,6 +107,8 @@ return require('packer').startup(function(use)
                     config = {
                         workspaces = {
                             notes = "~/notes",
+                            qb = "~/qb/00_brain",
+                            sai = "~/qb/01_studies/sai/00_brain",
                         },
                     },
                 },
