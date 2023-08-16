@@ -69,5 +69,10 @@ wk.register({
        name = "split",
        v = "vertical",
        h = "horizontal",
+   },
+   w = {
+       name = "split",
+       v = "vertical",
+       h = "horizontal",
    }
 }, { prefix = "<leader>"})
