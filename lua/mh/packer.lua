@@ -79,11 +79,6 @@ return require('packer').startup(function(use)
   })
 
   use {
-    "renerocksai/telekasten.nvim",
-    requires = {"nvim-telescope/telescope.nvim"}
-  }
-
-  use {
       "ThePrimeagen/refactoring.nvim",
       requires = {
           {"nvim-lua/plenary.nvim"},
@@ -118,4 +113,14 @@ return require('packer').startup(function(use)
     run = ":Neorg sync-parsers",
     requires = "nvim-lua/plenary.nvim",
 }
+  use 'averms/black-nvim'
+  use {
+  "nvim-neotest/neotest",
+  requires = {
+    "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter",
+    "antoinemadec/FixCursorHold.nvim", "nvim-neotest/neotest-python",
+    "nvim-neotest/neotest-plenary", "nvim-neotest/neotest-vim-test"
+  }
+}
+  use "folke/neodev.nvim"
 end)

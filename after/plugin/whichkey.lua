@@ -47,15 +47,6 @@ wk.register({
    Y = {
        "yank line (clipboard)"
    },
-   z = {
-       name = "telekasten",
-       z = { "open menu" },
-       n = { "new note" },
-       i = { "insert link" },
-       f = { "follow link" },
-       v = { "switch vault" },
-       x = { "find notes" },
-   },
    r = {
        name = "refactoring",
        e = { "extract" },
@@ -74,5 +65,6 @@ wk.register({
        name = "split",
        v = "vertical",
        h = "horizontal",
-   }
+   },
+   b = { "black" }
 }, { prefix = "<leader>"})
