@@ -124,4 +124,5 @@ return require('packer').startup(function(use)
   }
 }
   use "folke/neodev.nvim"
+  use 'fatih/vim-go'
 end)

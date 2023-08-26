@@ -1,6 +1,19 @@
 local wk = require("which-key")
 
 wk.register({
+    o = {
+        name = "go",
+        b = "build",
+        l = "install",
+        t = "test",
+        y = "test func",
+        u = "debug",
+        d = "goto def",
+        i = "add to imports",
+        p = "drop from imports",
+        r = "rename obj",
+        c = "coverage",
+    },
     n = {
         name = "neorg",
         w = { "workspace" },
