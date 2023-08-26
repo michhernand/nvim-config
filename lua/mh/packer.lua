@@ -119,7 +119,8 @@ return require('packer').startup(function(use)
   requires = {
     "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter",
     "antoinemadec/FixCursorHold.nvim", "nvim-neotest/neotest-python",
-    "nvim-neotest/neotest-plenary", "nvim-neotest/neotest-vim-test"
+    "nvim-neotest/neotest-plenary", "nvim-neotest/neotest-vim-test",
+    "nvim-neotest/neotest-go",
   }
 }
   use "folke/neodev.nvim"
