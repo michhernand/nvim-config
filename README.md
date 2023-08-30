@@ -19,6 +19,7 @@
     - `git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim`
 ##
 - Install jsregexp: `luarocks install jsregexp`
+- Install gopls: `go install golang.org/x/tools/gopls@latest`
 ## Sync Packages:
 - open `lua/mh/packer.lua`
 - run `:so`
