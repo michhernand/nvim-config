@@ -4,15 +4,7 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-  -- Packer can manage itself
   use 'wbthomason/packer.nvim'
-
-  use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.2',
-	  -- or                            , branch = '0.1.x',
-	  requires = { {'nvim-lua/plenary.nvim'} }
-  }
-
   use ({
 	  "catppuccin/nvim",
 	  as = "catppuccin",
@@ -21,14 +13,50 @@ return require('packer').startup(function(use)
 	  end
   })
 
-  use(
-	  'nvim-treesitter/nvim-treesitter',
-	  {run = ':TSUpdate'}
-  )
 
-  use('mbbill/undotree')
 
-  use('tpope/vim-fugitive')
+  use 'averms/black-nvim'
+  use 'mbbill/undotree'
+  use 'folke/neodev.nvim'
+  use 'fatih/vim-go'
+  use 'f-person/git-blame.nvim'
+  use 'tpope/vim-fugitive'
+  use 'christoomey/vim-tmux-navigator'
+  use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+
+  use {
+      "ThePrimeagen/refactoring.nvim",
+      requires = {
+          {"nvim-lua/plenary.nvim"},
+          {"nvim-treesitter/nvim-treesitter"},
+      }
+  }
+
+  use {
+      "ThePrimeagen/harpoon",
+      requires = {"nvim-lua/plenary.nvim"}
+  }
+
+  use({
+	"L3MON4D3/LuaSnip",
+	tag = "v2.*",
+	run = "make install_jsregexp",
+  })
+
+  use({
+      "kdheepak/lazygit.nvim",
+      requires = {
+          "nvim-lua/plenary.nvim"
+      }
+  })
+
+  use {
+      'nvim-telescope/telescope.nvim', tag = '0.1.2', requires = {
+          {
+              'nvim-lua/plenary.nvim'
+          }
+      }
+  }
 
   use {
 	  'VonHeikemen/lsp-zero.nvim',
@@ -55,8 +83,6 @@ return require('packer').startup(function(use)
       end
   }
 
-  use ('christoomey/vim-tmux-navigator')
-
   use {
       'numToStr/Comment.nvim',
       config = function()
@@ -71,49 +97,6 @@ return require('packer').startup(function(use)
       }
   }
 
-  use({
-      "kdheepak/lazygit.nvim",
-      requires = {
-          "nvim-lua/plenary.nvim"
-      }
-  })
-
-  use {
-      "ThePrimeagen/refactoring.nvim",
-      requires = {
-          {"nvim-lua/plenary.nvim"},
-          {"nvim-treesitter/nvim-treesitter"},
-      }
-  }
-
-  use {
-      "ThePrimeagen/harpoon",
-      requires = {"nvim-lua/plenary.nvim"}
-  }
-
-  use {
-    "nvim-neorg/neorg",
-    config = function()
-        require('neorg').setup {
-            load = {
-                ["core.defaults"] = {}, -- Loads default behaviour
-                ["core.concealer"] = {}, -- Adds pretty icons to your documents
-                ["core.dirman"] = { -- Manages Neorg workspaces
-                    config = {
-                        workspaces = {
-                            notes = "~/notes",
-                            qb = "~/qb/00_brain",
-                            sai = "~/qb/01_studies/sai/00_brain",
-                        },
-                    },
-                },
-            },
-        }
-    end,
-    run = ":Neorg sync-parsers",
-    requires = "nvim-lua/plenary.nvim",
-}
-  use 'averms/black-nvim'
   use {
   "nvim-neotest/neotest",
   requires = {
@@ -123,6 +106,10 @@ return require('packer').startup(function(use)
     "nvim-neotest/neotest-go",
   }
 }
-  use "folke/neodev.nvim"
-  use 'fatih/vim-go'
+  use {
+	"windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {}
+    end
+}
+
 end)

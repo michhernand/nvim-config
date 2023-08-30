@@ -1,37 +1,161 @@
-local lsp = require('lsp-zero').preset({})
-
-lsp.on_attach(function(client, bufnr)
-  -- see :help lsp-zero-keybindings
-  -- to learn the available actions
-  lsp.default_keymaps({buffer = bufnr})
-
-  lsp.preset("recommended")
-
-  lsp.ensure_installed({
-	  "gopls",
-  })
-end)
-
-lsp.setup_servers({"gopls"})
-
+-- Lsp-zero
+local lsp_zero = require("lsp-zero").preset("recommended")
 local cmp = require("cmp")
-local cmp_action = require("lsp-zero").cmp_action()
-cmp.setup({
-    preselect = "item",
-    completion = {
-        completeopt = "menu,menuone,noinsert"
-    },
-    mapping = {
-        ["<Tab>"] = cmp_action.luasnip_supertab(),
-        ["<S-Tab>"] = cmp_action.luasnip_shift_supertab(),
-        ["<CR>"] = cmp.mapping.confirm({select = false}),
-    }
+local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+local lspconfig = require("lspconfig")
+local lsnip = require("luasnip")
+
+-- Luasnip
+require("luasnip.loaders.from_lua").load()
+lsnip.setup({
+    history = true,
+    update_events = { "TextChanged", "TextChangedI" },
+    enable_autosnippets = true,
 })
 
--- (Optional) Configure lua language server for neovim
-require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+lsp_zero.on_attach(function(_, bufnr)
+    lsp_zero.default_keymaps({ buffer = bufnr })
+    vim.keymap.set(
+        "n",
+        "gr",
+        "<Cmd>Telescope lsp_references<CR>",
+        { buffer = true, desc = "Show references in a Telescope window." }
+    )
+end)
 
-vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+-- Language servers
+lsp_zero.ensure_installed({
+    "pyright",
+    "rust_analyzer",
+    "gopls",
+})
+lspconfig.lua_ls.setup({
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim", "s", "t", "i", "d", "c", "sn", "f" },
+            },
+            format = {
+                enable = false,
+            },
+        },
+    },
+})
+lspconfig.clangd.setup({
+    arguments = { "-Wall" },
+})
+lspconfig.pyright.setup({
+    settings = {
+        python = {
+            analysis = {
+                diagnosticSeverityOverrides = {
+                    reportPropertyTypeMismatch = true,
+                    reportImportCycles = "warning",
+                    reportUnusedFunction = "warning",
+                    reportDuplicateImport = "warning",
+                    reportPrivateUsage = "warning",
+                    reportTypeCommentUsage = "warning",
+                    reportConstantRedefinition = "error",
+                    reportDeprecated = "warning",
+                    reportIncompatibleMethodOverride = "error",
+                    reportIncompatibleVariableOverride = "error",
+                    reportInconsistentConstructor = "error",
+                    reportOverlappingOverload = "error",
+                    reportMissingSuperCall = "error",
+                    reportUnititializedInstanceVariable = "error",
+                    reportUnknownParameterType = "warning",
+                    reportUnknownArgumentType = "warning",
+                    reportUnknownLambdaType = "warning",
+                    reportUnknownVariableType = "warning",
+                    reportUnknownMemberType = "warning",
+                    reportMissingParameterType = "error",
+                    reportMissingTypeArgument = "warning",
+                    reportUnnecessaryIsInstance = "warning",
+                    reportUnnecessaryCast = "warning",
+                    reportUnnecessaryComparison = "warning",
+                    reportUnnecessaryContains = "warning",
+                    reportAssertAlwaysTrue = "warning",
+                    reportSelfClsParameterName = "error",
+                    reportImplicitStringConcatenation = "warning",
+                    reportUnusedExpression = "warning",
+                    reportUnnecessaryTypeIgnoreComment = "warning",
+                    reportMatchNotExhaustive = "error",
+                    reportShadowedImports = "error",
+                },
+            },
+        },
+    },
+})
+lspconfig.rust_analyzer.setup({
+    settings = {
+        ["rust-analyzer"] = {
+            check = {
+                command = "clippy",
+            },
+        },
+    },
+})
 
-lsp.setup()
+-- Completion setup
+cmp.setup({
+    sources = {
+        { name = "luasnip", option = { show_autosnippets = true } },
+        { name = "nvim_lua" },
+        { name = "nvim_lsp" },
+        { name = "path" },
+    },
+    mapping = {
+        --- @param fallback function
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif lsnip.expand_or_jumpable() then
+                lsnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, { "i", "s" }), -- Tab autocomplete
+        --- @param fallback function
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif lsnip.jumpable(-1) then
+                lsnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { "i", "s" }),
+        ["<CR>"] = cmp.mapping.confirm({ select = false }), -- Enter to complete
+        ["<Up>"] = cmp.mapping.abort(), -- No up and down selection
+        ["<Down>"] = cmp.mapping.abort(),
+        --- @param fallback function
+        ["<C-l>"] = cmp.mapping(function(fallback) -- Move choice forward
+            if lsnip.choice_active() then
+                lsnip.change_choice()
+            else
+                fallback()
+            end
+        end),
+        --- @param fallback function
+        ["<C-h>"] = cmp.mapping(function(fallback) -- Move choice backward
+            if lsnip.choice_active() then
+                lsnip.change_choice(-1)
+            else
+                fallback()
+            end
+        end),
+    },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
+    -- Expands snippets
+    snippet = {
+        expand = function(args) lsnip.lsp_expand(args.body) end,
+    },
+})
+
+-- Autoclose parenthesis on function completion
+cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+lsp_zero.setup()
