@@ -71,10 +71,11 @@ wk.register({
        g = { "extract blcok to file" },
    },
    s = {
-       name = "split",
-       v = "vertical",
-       h = "horizontal",
+       name = "spectre",
+       w = { "search current word" },
+       p = { "search on current file" }
    },
+   S = "toggle spectre",
    w = {
        name = "split",
        v = "vertical",

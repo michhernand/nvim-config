@@ -31,6 +31,12 @@ return require('packer').startup(function(use)
   use 'kristijanhusak/vim-dadbod-ui'
   use 'kristijanhusak/vim-dadbod-completion'
   use 'folke/todo-comments.nvim'
+  use {
+      'nvim-pack/nvim-spectre',
+      requires = {
+          {"nvim-lua/plenary.nvim"},
+      }
+  }
 
   use {
       "ThePrimeagen/refactoring.nvim",
