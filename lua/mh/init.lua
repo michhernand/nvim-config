@@ -18,3 +18,6 @@ require("neotest").setup({
     require("neotest-go")
   },
 })
+
+require("hydrate").setup()
+

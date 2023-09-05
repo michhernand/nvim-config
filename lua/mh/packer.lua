@@ -23,6 +23,9 @@ return require('packer').startup(function(use)
   use 'tpope/vim-fugitive'
   use 'christoomey/vim-tmux-navigator'
   use('nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'})
+  use 'rcarriga/nvim-notify'
+  use 'mvllow/stand.nvim'
+  use 'stefanlogue/hydrate.nvim'
 
   use {
       "ThePrimeagen/refactoring.nvim",
@@ -111,5 +114,10 @@ return require('packer').startup(function(use)
     config = function() require("nvim-autopairs").setup {}
     end
 }
+
+  use {
+    'renerocksai/telekasten.nvim',
+    requires = {'nvim-telescope/telescope.nvim'}
+  }
 
 end)

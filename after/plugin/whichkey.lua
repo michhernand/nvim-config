@@ -1,6 +1,18 @@
 local wk = require("which-key")
 
 wk.register({
+    n = "Hydrate",
+    z = {
+        name = "telekasten",
+        f = "find_notes",
+        g = "search_notes",
+        d = "goto_today",
+        z = "follow_link",
+        n = "new_note",
+        c = "show_calendar",
+        b = "show_backlinks",
+        I = "insert_image_link",
+    },
     o = {
         name = "go",
         b = "build",
@@ -13,17 +25,6 @@ wk.register({
         p = "drop from imports",
         r = "rename obj",
         c = "coverage",
-    },
-    n = {
-        name = "neorg",
-        w = { "workspace" },
-        r = { "return" },
-        j = {
-            name = "journal",
-            t = "today",
-            y = "yesterday",
-            o = "tomorrow",
-        }
     },
     f = {
         name = "telescope",
