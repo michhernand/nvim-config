@@ -5,15 +5,16 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
-  use ({
-	  "catppuccin/nvim",
-	  as = "catppuccin",
-	  config = function()
-		  vim.cmd('colorscheme catppuccin')
-	  end
-  })
 
+  use { "catppuccin/nvim", as = "catppuccin" }
 
+  use {
+      "folke/noice.nvim",
+      requires = {
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+      }
+  }
 
   use 'averms/black-nvim'
   use 'mbbill/undotree'
@@ -26,6 +27,10 @@ return require('packer').startup(function(use)
   use 'rcarriga/nvim-notify'
   use 'mvllow/stand.nvim'
   use 'stefanlogue/hydrate.nvim'
+  use 'tpope/vim-dadbod'
+  use 'kristijanhusak/vim-dadbod-ui'
+  use 'kristijanhusak/vim-dadbod-completion'
+  use 'folke/todo-comments.nvim'
 
   use {
       "ThePrimeagen/refactoring.nvim",
