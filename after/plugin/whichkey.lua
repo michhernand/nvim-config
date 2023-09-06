@@ -80,5 +80,10 @@ wk.register({
        v = "vertical",
        h = "horizontal",
    },
-   b = { "black" }
+   B = { "black" },
+   b = {
+       name = "buffer",
+       n = "next",
+       p = "prev",
+   }
 }, { prefix = "<leader>"})

@@ -28,3 +28,6 @@ vim.keymap.set("n", "<leader>sv", "<cmd> vsplit<CR>")
 vim.keymap.set("n", "<leader>sh", "<cmd> split<CR>")
 vim.keymap.set("n", "<leader>wv", "<cmd> vsplit<CR>")
 vim.keymap.set("n", "<leader>wh", "<cmd> split<CR>")
+
+vim.keymap.set("n", "<leader>bn", "<cmd> bnext<CR>")
+vim.keymap.set("n", "<leader>bl", "<cmd> bprev<CR>")

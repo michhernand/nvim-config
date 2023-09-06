@@ -33,6 +33,11 @@ return require('packer').startup(function(use)
   use 'folke/todo-comments.nvim'
 
   use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'nvim-tree/nvim-web-devicons', opt = true }
+  }
+
+  use {
       "ThePrimeagen/refactoring.nvim",
       requires = {
           {"nvim-lua/plenary.nvim"},
