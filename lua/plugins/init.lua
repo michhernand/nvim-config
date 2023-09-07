@@ -1,6 +1,13 @@
 return {
     -- Colorscheme
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    {
+        'goolord/alpha-nvim',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        config = function ()
+            require'alpha'.setup(require'alpha.themes.startify'.config)
+        end
+    },
 
     { "airblade/vim-gitgutter", event = {"BufReadPost", "BufNewFile" }},
     { "nvim-lua/plenary.nvim", lazy = true },
