@@ -52,7 +52,8 @@ return {
     {
         'numToStr/Comment.nvim',
         opts = {},
-        lazy = false,
+        lazy = true,
+        event = { "BufReadPost", "BufNewFile" }
     },
     { "windwp/nvim-autopairs", lazy = false },
 
