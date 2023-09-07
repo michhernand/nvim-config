@@ -16,10 +16,13 @@ vim.g.maplocalleader = ","
 
 require("lazy").setup("plugins")
 
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("tokyonight-night")
 
 -- require("remap")
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "M-k", ":resize -5")
+vim.keymap.set("n", "M-j", ":resize +5")
+vim.keymap.set("n", "M-h", ":vertical resize -5")
+vim.keymap.set("n", "M-l", ":vertical resize +5")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -43,13 +46,11 @@ vim.keymap.set("n", "<leader>Y", '"+Y')
 vim.keymap.set("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>")
 vim.keymap.set("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>")
 
-vim.keymap.set("n", "<leader>sv", "<cmd> vsplit<CR>")
-vim.keymap.set("n", "<leader>sh", "<cmd> split<CR>")
 vim.keymap.set("n", "<leader>wv", "<cmd> vsplit<CR>")
 vim.keymap.set("n", "<leader>wh", "<cmd> split<CR>")
 
 vim.keymap.set("n", "<leader>bn", "<cmd> bnext<CR>")
-vim.keymap.set("n", "<leader>bl", "<cmd> bprev<CR>")
+vim.keymap.set("n", "<leader>bp", "<cmd> bprev<CR>")
 
 --require("set")
 vim.opt.nu = true
@@ -70,3 +71,7 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 8
 
 vim.opt.cursorline = true
+
+
+
+
