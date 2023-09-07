@@ -1,1 +1,1 @@
-vim.keymap.set("n", "<leader>b", "<cmd>call Black()<CR>")
+--vim.keymap.set("n", "<leader>B", "<cmd>call Black()<CR>")
