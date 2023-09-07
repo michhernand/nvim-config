@@ -2,6 +2,7 @@ return {
     -- Colorscheme
     { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
 
+    { "airblade/vim-gitgutter", event = {"BufReadPost", "BufNewFile" }},
     { "nvim-lua/plenary.nvim", lazy = true },
     { "MunifTanjim/nui.nvim", lazy = true },
     { "rcarriga/nvim-notify", lazy = true },
