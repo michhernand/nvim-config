@@ -29,7 +29,8 @@ return {
             enable_autosnippets = true,
         })
 
-        lsp_zero.on_attach(function(_, bufnr)
+        lsp_zero.on_attach(function(client, bufnr)
+            local opts = { buffer = bufnr, remap = false }
             lsp_zero.default_keymaps({ buffer = bufnr })
             vim.keymap.set(
             "n",
@@ -37,6 +38,9 @@ return {
             "<Cmd>Telescope lsp_references<CR>",
             { buffer = true, desc = "Show references in a Telescope window." }
             )
+
+
+            vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
         end)
 
         -- Language servers
