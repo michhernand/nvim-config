@@ -1,4 +1,5 @@
 return {
+    -- TODO: Add https://github.com/dhruvasagar/vim-dotoo
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
     event = { "BufReadPost", "BufNewFile" },
