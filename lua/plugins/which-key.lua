@@ -15,6 +15,13 @@ return {
         end
         -- local wk = require("which-key")
         wk.register({
+            ["<leader>h"] = {
+                name = "harpoon",
+                m = "menu",
+                k = "add file",
+                n = "nav next",
+                p = "nav prev",
+            },
             ["<leader>f"] = {
                 name = "telescope",
                 f = { "find files" },
@@ -41,10 +48,7 @@ return {
                 b = "show_backlinks",
                 I = "insert_img_link",
             },
-            ["<leader>g"] = {
-                name = "git",
-                g = { "lazygit" },
-            },
+            ["<leader>G"] = "lazygit",
             ["<leader>u"] = {
                 "undo tree",
                 u = { "launch" },
@@ -82,19 +86,6 @@ return {
                 name = "buffers",
                 n = "next",
                 p = "prev",
-            },
-            ["<leader>o"] = {
-                name = "go",
-                b = "build",
-                l = "install",
-                t = "test",
-                y = "test func",
-                u = "debug",
-                d = "goto def",
-                i = "add to imports",
-                p = "drop from imports",
-                r = "rename obj",
-                c = "coverage",
             },
         })
     end,

@@ -68,24 +68,5 @@ return {
     { "christoomey/vim-tmux-navigator", lazy = false },
     { "stefanlogue/hydrate.nvim", lazy = false },
     { "averms/black-nvim", lazy = true, keys = {"<leader>B", "<cmd>call Black()<CR>"}},
-    { "fatih/vim-go",
-    lazy = true ,
-    keys = {
-        {"<leader>ob", "<cmd> GoBuild<CR>"},
-        {"<leader>ol", "<cmd> GoInstall<CR>"},
-        {"<leader>ot", "<cmd> GoTest<CR>"},
-        { "<leader>oy", "<cmd> GoTestFunc<CR>"},
-        {"<leader>ou", "<cmd> GoDebugStart<CR>"},
-        {"<leader>od", "<cmd> GoDef<CR>"},
-        {"n", "<leader>oi", function()
-            vim.cmd("GoImport " .. vim.fn.input("Import > "))
-        end},
-        {"<leader>op", function()
-            vim.cmd("GoDrop " .. vim.fn.input("Drop > "))
-        end},
-        {"<leader>or", "<cmd> GoRename<CR>"},
-        {"<leader>oc", "<cmd> GoCoverage<CR>"}
-    }
-},
 { "f-person/git-blame.nvim", event = { "BufReadPost", "BufNewFile" }},
 }
