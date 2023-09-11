@@ -6,6 +6,8 @@
   "black-nvim": { "branch": "master", "commit": "8fb3efc562b67269e6f31f8653297f826534fa4b" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
   "git-blame.nvim": { "branch": "master", "commit": "41e22dc843c6821a410db57be0b7025154f9d8ec" },
+  "go.nvim": { "branch": "master", "commit": "5e9e083f4927402eab6ab233e970b397daa2e826" },
+  "guihua.lua": { "branch": "master", "commit": "5ad8dba19ce9b9fd8965598984dfdc9c119f97e4" },
   "harpoon": { "branch": "master", "commit": "21f4c47c6803d64ddb934a5b314dcb1b8e7365dc" },
   "hydrate.nvim": { "branch": "main", "commit": "8d4dfd099a358a86b359573a679174ab5c641030" },
   "lazy.nvim": { "branch": "main", "commit": "2a9354c7d2368d78cbd5575a51a2af5bd8a6ad01" },
