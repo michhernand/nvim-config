@@ -52,6 +52,8 @@ vim.keymap.set("n", "<leader>wh", "<cmd> split<CR>")
 vim.keymap.set("n", "<leader>bn", "<cmd> bnext<CR>")
 vim.keymap.set("n", "<leader>bp", "<cmd> bprev<CR>")
 
+vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
+
 --require("set")
 vim.opt.nu = true
 vim.opt.relativenumber = true

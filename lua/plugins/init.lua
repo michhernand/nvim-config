@@ -13,6 +13,7 @@ return {
             require'alpha'.setup(require'alpha.themes.startify'.config)
         end
     },
+    { "dstein64/vim-startuptime", event = "VeryLazy" },
     {
         "nvim-pack/nvim-spectre",
         lazy = true,
@@ -29,11 +30,8 @@ return {
     { "nvim-lua/plenary.nvim", lazy = true },
     { "MunifTanjim/nui.nvim", lazy = true },
     { "rcarriga/nvim-notify", lazy = true },
-    { "neovim/nvim-lspconfig", lazy = true },
-    { "williamboman/mason.nvim", lazy = true},
-    { "williamboman/mason-lspconfig.nvim", lazy = true },
-    {'hrsh7th/nvim-cmp', lazy = true},
-    {'hrsh7th/cmp-nvim-lsp', lazy = true},
+    -- { "neovim/nvim-lspconfig", lazy = true },
+    -- {'hrsh7th/cmp-nvim-lsp', lazy = true},
     {
         "folke/neodev.nvim",
         opts = {},
@@ -44,9 +42,21 @@ return {
 
 
     -- Tpope Stuff + Extensions
-    { "tpope/vim-dadbod", lazy=false},
-    { "kristijanhusak/vim-dadbod-ui", lazy=false, dependencies = { "kristijanhusak/vim-dadbod-completion" } },
-    { "kristijanhusak/vim-dadbod-completion" },
+    { 
+        "tpope/vim-dadbod", 
+        event = "VeryLazy",
+    },
+    { 
+        "kristijanhusak/vim-dadbod-ui", 
+        lazy=true, 
+        event = "VeryLazy",
+        event = { "BufReadPost", "BufNewFile" }
+    },
+    {
+        "kristijanhusak/vim-dadbod-completion",
+        lazy=true,
+        event = "VeryLazy",
+    },
 
 
     {
@@ -55,14 +65,15 @@ return {
         lazy = true,
         event = { "BufReadPost", "BufNewFile" }
     },
-    { "windwp/nvim-autopairs", lazy = false },
+    { 
+        "windwp/nvim-autopairs", 
+        event = "InsertEnter",
+        config = function()
+            require("nvim-autopairs").setup()
+        end
 
-    {
-        "L3MON4D3/LuaSnip",
-        lazy = true,
-        version = "v2.*",
-        build = "make install_jsregexp"
     },
+
 
 
     { "christoomey/vim-tmux-navigator", lazy = false },
