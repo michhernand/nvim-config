@@ -18,10 +18,12 @@ return
             {"<leader>zc", "<cmd>Telekasten show_calendar<CR>"},
             {"<leader>zb", "<cmd>Telekasten show_backlinks<CR>"},
             {"<leader>zI", "<cmd>Telekasten insert_img_link<CR>"},
+            {"<leader>zv", "<cmd>Telekasten switch_vault<CR>"},
         },
         config = function()
             require("telekasten").setup({
-                home = vim.fn.expand("~/zettlekasten")
+                home = vim.fn.expand("~/zettlekasten"),
+                vaults = require("./plugins.local.telekasten"),
             })
             vim.keymap.set("i", "[[", "<cmd>Telekasten insert_link<CR>")
         end
