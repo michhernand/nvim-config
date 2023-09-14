@@ -19,7 +19,7 @@ return {
                 name = "trouble",
                 t = "toggle",
                 r = "refresh",
-            }
+            },
             ["<leader>g"] = {
                 name = "go",
                 c = "term close",
