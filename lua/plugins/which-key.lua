@@ -15,6 +15,16 @@ return {
         end
         -- local wk = require("which-key")
         wk.register({
+            ["<leader>t"] = {
+                name = "trouble",
+                t = "toggle",
+                r = "refresh",
+            },
+            ["<leader>g"] = {
+                name = "go",
+                c = "term close",
+                t = "test",
+            },
             ["<leader>h"] = {
                 name = "harpoon",
                 m = "menu",
