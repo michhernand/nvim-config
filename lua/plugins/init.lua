@@ -35,6 +35,14 @@ return {
     {'hrsh7th/nvim-cmp', lazy = true},
     {'hrsh7th/cmp-nvim-lsp', lazy = true},
     {
+        'VonHeikemen/fine-cmdline.nvim', 
+        lazy = false, 
+        dependencies = {'MunifTanjim/nui.nvim'},
+        keys = {
+            {':', '<cmd>FineCmdline<CR>'}
+        }
+    },
+    {
         "folke/neodev.nvim",
         opts = {},
         event = { "BufReadPost", "BufNewFile" }

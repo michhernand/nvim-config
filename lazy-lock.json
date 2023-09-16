@@ -5,6 +5,7 @@
   "alpha-nvim": { "branch": "main", "commit": "712dc1dccd4fd515ef8bd126b3718f79d3e23b0d" },
   "black-nvim": { "branch": "master", "commit": "8fb3efc562b67269e6f31f8653297f826534fa4b" },
   "cmp-nvim-lsp": { "branch": "main", "commit": "44b16d11215dce86f253ce0c30949813c0a90765" },
+  "fine-cmdline.nvim": { "branch": "main", "commit": "ead2b85e455eacde10469a8fcf1a717822d2bb9a" },
   "git-blame.nvim": { "branch": "master", "commit": "41e22dc843c6821a410db57be0b7025154f9d8ec" },
   "go.nvim": { "branch": "master", "commit": "5e9e083f4927402eab6ab233e970b397daa2e826" },
   "guihua.lua": { "branch": "master", "commit": "5ad8dba19ce9b9fd8965598984dfdc9c119f97e4" },
