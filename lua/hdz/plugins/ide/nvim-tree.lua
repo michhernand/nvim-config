@@ -11,8 +11,6 @@ return
     end,
     keys = {
         { "<C-n>", "<cmd>NvimTreeToggle<CR>" },
-        { "<leader>tt", "<cmd>NvimTreeToggle<CR>" },
-        { "<leader>tc", "<cmd>NvimTreeCollapse<CR>" },
     }
 }
 

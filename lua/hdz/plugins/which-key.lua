@@ -64,9 +64,9 @@ return {
                 u = { "launch" },
             },
             ["<leader>t"] = {
-                "nvim tree",
+                "trouble",
                 t = { "toggle" },
-                c = { "collapse tree" },
+                r = { "refresh" },
             },
             ["<leader>d"] = {
                 "delete (keep register)"
@@ -96,6 +96,7 @@ return {
                 name = "buffers",
                 n = "next",
                 p = "prev",
+                d = "delete",
             },
         })
     end,

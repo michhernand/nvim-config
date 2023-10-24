@@ -14,7 +14,14 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-require("lazy").setup("plugins")
+require("lazy").setup({
+    {import = "hdz.plugins"},
+    {import = "hdz.plugins.lsp"},
+    {import = "hdz.plugins.colorscheme"},
+    {import = "hdz.plugins.git"},
+    {import = "hdz.plugins.ide"},
+    {import = "hdz.plugins.ui"},
+})
 
 vim.cmd.colorscheme("tokyonight-night")
 
@@ -51,6 +58,7 @@ vim.keymap.set("n", "<leader>wh", "<cmd> split<CR>")
 
 vim.keymap.set("n", "<leader>bn", "<cmd> bnext<CR>")
 vim.keymap.set("n", "<leader>bp", "<cmd> bprev<CR>")
+vim.keymap.set("n", "<leader>bd", "<cmd> bdelete<CR>")
 
 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
 
