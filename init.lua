@@ -26,10 +26,10 @@ require("lazy").setup({
 vim.cmd.colorscheme("tokyonight-night")
 
 -- require("remap")
-vim.keymap.set("n", "M-k", ":resize -5")
-vim.keymap.set("n", "M-j", ":resize +5")
-vim.keymap.set("n", "M-h", ":vertical resize -5")
-vim.keymap.set("n", "M-l", ":vertical resize +5")
+vim.keymap.set("n", "<CS-k>", ":res -5<CR>")
+vim.keymap.set("n", "<CS-j>", ":res +5<CR>")
+vim.keymap.set("n", "<CS-h>", ":vertical res -5<CR>")
+vim.keymap.set("n", "<CS-l>", ":vertical res +5<CR>")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
