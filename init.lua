@@ -28,10 +28,10 @@ if os.getenv("NEOVIM_ENV") ~= "server" then
 end
 
 -- require("remap")
-vim.keymap.set("n", "<CS-k>", ":res -5<CR>")
-vim.keymap.set("n", "<CS-j>", ":res +5<CR>")
-vim.keymap.set("n", "<CS-h>", ":vertical res -5<CR>")
-vim.keymap.set("n", "<CS-l>", ":vertical res +5<CR>")
+vim.keymap.set("n", "<leader>Rk", ":res -5<CR>")
+vim.keymap.set("n", "<leader>Rj", ":res +5<CR>")
+vim.keymap.set("n", "<leader>Rh", ":vertical res -5<CR>")
+vim.keymap.set("n", "<leader>Rl", ":vertical res +5<CR>")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")

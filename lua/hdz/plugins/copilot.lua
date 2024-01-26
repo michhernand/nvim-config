@@ -1,4 +1,8 @@
-return {
+
+if os.getenv("DISABLE_COPILOT") == "true" then 
+    return {}
+else
+    return {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
   event = "InsertEnter",
@@ -11,6 +15,7 @@ return {
       python = true,
       markdown = true,
       help = true,
-    },
-  },
-}
+        },
+      },
+    }
+end

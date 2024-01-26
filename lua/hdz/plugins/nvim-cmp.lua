@@ -1,19 +1,27 @@
+local my_dependencies = {
+    "hrsh7th/cmp-buffer", -- source for text in buffer
+    "hrsh7th/cmp-path", -- source for file system paths
+    "L3MON4D3/LuaSnip", -- snippet engine
+    "saadparwaiz1/cmp_luasnip", -- for autocompletion
+    "rafamadriz/friendly-snippets", -- useful snippets
+    "onsails/lspkind.nvim", -- vs-code like pictograms
+}
+
+if os.getenv("DISABLE_COPILOT") ~= "true" then
+    table.insert(my_dependencies, 1, "copilot.lua")
+    table.insert(my_dependencies, 1, "zbirenbaum/copilot-cmp")
+end
+
 return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
-    dependencies = {
-        "hrsh7th/cmp-buffer", -- source for text in buffer
-        "hrsh7th/cmp-path", -- source for file system paths
-        "L3MON4D3/LuaSnip", -- snippet engine
-        "saadparwaiz1/cmp_luasnip", -- for autocompletion
-        "rafamadriz/friendly-snippets", -- useful snippets
-        "onsails/lspkind.nvim", -- vs-code like pictograms
-        "zbirenbaum/copilot-cmp",
-        "copilot.lua",
-    },
+    dependencies = my_dependencies,
     config = function()
-        local copilot_cmp = require("copilot_cmp")
-        copilot_cmp.setup(opts)
+
+        if os.getenv("DISABLE_COPILOT") ~= "true" then
+            local copilot_cmp = require("copilot_cmp")
+            copilot_cmp.setup(opts)
+        end
         -- attach cmp source whenever copilot attaches
         -- fixes lazy-loading issues with the copilot cmp source
         -- require("lazyvim.util").lsp.on_attach(function(client)
@@ -30,6 +38,17 @@ return {
 
         -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
         require("luasnip.loaders.from_vscode").lazy_load()
+
+        local my_sources = {
+            { name = "nvim_lsp" },
+            { name = "luasnip" },
+            { name = "buffer" },
+            { name = "path" },
+        }
+
+        if os.getenv("DISABLE_COPILOT") ~= "true" then
+            table.insert(my_sources, 1, { name = "copilot" })
+        end
 
         cmp.setup({
             completion = {
@@ -51,13 +70,7 @@ return {
             -- ["C-h"] = function() vim.lsp.buf.signature_help() end
         }),
         -- sources for autocompletion
-        sources = cmp.config.sources({
-            { name = "copilot" },
-            { name = "nvim_lsp" },
-            { name = "luasnip" }, -- snippets
-            { name = "buffer" }, -- text within current buffer
-            { name = "path" }, -- file system paths
-        }),
+        sources = cmp.config.sources(my_sources),
         -- configure lspkind for vs-code like pictograms in completion menu
         formatting = {
             format = lspkind.cmp_format({
