@@ -8,8 +8,20 @@ return {
         "saadparwaiz1/cmp_luasnip", -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
         "onsails/lspkind.nvim", -- vs-code like pictograms
+        "zbirenbaum/copilot-cmp",
+        "copilot.lua",
     },
     config = function()
+        local copilot_cmp = require("copilot_cmp")
+        copilot_cmp.setup(opts)
+        -- attach cmp source whenever copilot attaches
+        -- fixes lazy-loading issues with the copilot cmp source
+        require("lazyvim.util").lsp.on_attach(function(client)
+          if client.name == "copilot" then
+            copilot_cmp._on_insert_enter({})
+          end
+        end)
+
         local cmp = require("cmp")
 
         local luasnip = require("luasnip")
@@ -40,6 +52,7 @@ return {
         }),
         -- sources for autocompletion
         sources = cmp.config.sources({
+            { name = "copilot", priority = 100},
             { name = "nvim_lsp" },
             { name = "luasnip" }, -- snippets
             { name = "buffer" }, -- text within current buffer
