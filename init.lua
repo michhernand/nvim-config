@@ -24,14 +24,16 @@ require("lazy").setup({
 })
 
 if os.getenv("NEOVIM_ENV") ~= "server" then
-    vim.cmd.colorscheme("tokyonight-night")
+    -- vim.cmd.colorscheme("tokyonight-night")
+    vim.cmd.colorscheme("gruvbox")
+    vim.o.background = "light"
 end
 
 -- require("remap")
-vim.keymap.set("n", "<CS-k>", ":res -5<CR>")
-vim.keymap.set("n", "<CS-j>", ":res +5<CR>")
-vim.keymap.set("n", "<CS-h>", ":vertical res -5<CR>")
-vim.keymap.set("n", "<CS-l>", ":vertical res +5<CR>")
+vim.keymap.set("n", "<leader>Rk", ":res -5<CR>")
+vim.keymap.set("n", "<leader>Rj", ":res +5<CR>")
+vim.keymap.set("n", "<leader>Rh", ":vertical res -5<CR>")
+vim.keymap.set("n", "<leader>Rl", ":vertical res +5<CR>")
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -84,6 +86,8 @@ vim.opt.scrolloff = 8
 
 vim.opt.cursorline = true
 
-
-
-
+local config = {
+    cmd = {'/opt/homebrew/bin/jdtls'},
+    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+}
+require('jdtls').start_or_attach(config)
