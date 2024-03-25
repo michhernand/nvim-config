@@ -24,7 +24,9 @@ require("lazy").setup({
 })
 
 if os.getenv("NEOVIM_ENV") ~= "server" then
-    vim.cmd.colorscheme("tokyonight-night")
+    -- vim.cmd.colorscheme("tokyonight-night")
+    vim.cmd.colorscheme("gruvbox")
+    vim.o.background = "light"
 end
 
 -- require("remap")
@@ -84,6 +86,8 @@ vim.opt.scrolloff = 8
 
 vim.opt.cursorline = true
 
-
-
-
+local config = {
+    cmd = {'/opt/homebrew/bin/jdtls'},
+    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
+}
+require('jdtls').start_or_attach(config)
