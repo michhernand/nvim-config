@@ -21,6 +21,7 @@ require("lazy").setup({
     {import = "hdz.plugins.git"},
     {import = "hdz.plugins.ide"},
     {import = "hdz.plugins.ui"},
+    {import = "hdz.plugins.dap"},
 })
 
 if os.getenv("NEOVIM_ENV") ~= "server" then
@@ -85,6 +86,9 @@ vim.opt.undofile = true
 vim.opt.scrolloff = 8
 
 vim.opt.cursorline = true
+
+vim.lsp.set_log_level("debug")
+require('vim.lsp.log').set_format_func(vim.inspect)
 
 local config = {
     cmd = {'/opt/homebrew/bin/jdtls'},
