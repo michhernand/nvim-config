@@ -23,13 +23,15 @@ imports = {
     {import = "hdz.plugins.ide"},
     {import = "hdz.plugins.ui"},
     {import = "hdz.plugins.dap"},
-    {import = "hdz.keymaps.qwerty"}
 }
 
 if os.getenv("NEOVIM_COLEMAK") == "1" then
-    table.insert({ import = "hdz.keymaps.colemak" })
+    require("hdz.keymaps.colemak.keymap")
+    require("hdz.keymaps.colemak.remap")
+    -- table.insert(imports, { import = "hdz.keymaps.colemak" })
 else
-    table.insert({ import = "hdz.keymaps.qwerty" })
+    require("hdz.keymaps.qwerty.keymap")
+    -- table.insert(imports, { import = "hdz.keymaps.qwerty" })
 end
 
 require("lazy").setup(imports)

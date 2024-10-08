@@ -22,7 +22,7 @@ vim.keymap.set('n', 'gn', 'gj', { noremap = true, desc = "Move down (display lin
 vim.keymap.set('n', 'ge', 'gk', { noremap = true, desc = "Move up (display line)" })
 
 -- Window navigation
-map('n', '<C-n>', '<C-j>', { noremap = true, desc = "Move to lower window" })
-map('n', '<C-e>', '<C-e>', { noremap = true, desc = "Move to upper window" })
-map('n', '<C-i>', '<C-i>', { noremap = true, desc = "Move to right window" })
+vim.keymap.set('n', '<C-n>', '<C-j>', { noremap = true, desc = "Move to lower window" })
+vim.keymap.set('n', '<C-e>', '<C-e>', { noremap = true, desc = "Move to upper window" })
+vim.keymap.set('n', '<C-i>', '<C-i>', { noremap = true, desc = "Move to right window" })
 
