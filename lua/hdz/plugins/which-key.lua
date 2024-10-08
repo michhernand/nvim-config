@@ -47,17 +47,6 @@ return {
                 p = "open file search",
             },
 
-            ["<leader>z"] = {
-                name = "telekasten",
-                f = "find_notes",
-                g = "search_notes",
-                d = "goto_today",
-                z = "follow_link",
-                n = "new_note",
-                c = "show_calendar",
-                b = "show_backlinks",
-                I = "insert_img_link",
-            },
             ["<leader>G"] = "lazygit",
             ["<leader>u"] = {
                 "undo tree",
