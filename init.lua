@@ -14,7 +14,8 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-require("lazy").setup({
+
+imports = {
     {import = "hdz.plugins"},
     {import = "hdz.plugins.lsp"},
     {import = "hdz.plugins.colorscheme"},
@@ -22,50 +23,22 @@ require("lazy").setup({
     {import = "hdz.plugins.ide"},
     {import = "hdz.plugins.ui"},
     {import = "hdz.plugins.dap"},
-})
+    {import = "hdz.keymaps.qwerty"}
+}
+
+if os.getenv("NEOVIM_COLEMAK") == "1" then
+    table.insert({ import = "hdz.keymaps.colemak" })
+else
+    table.insert({ import = "hdz.keymaps.qwerty" })
+end
+
+require("lazy").setup(imports)
 
 if os.getenv("NEOVIM_ENV") ~= "server" then
     vim.cmd.colorscheme("tokyonight-night")
-    -- vim.cmd.colorscheme("gruvbox")
-    -- vim.o.background = "light"
 end
 
 -- require("remap")
-vim.keymap.set("n", "<leader>Rk", ":res -5<CR>")
-vim.keymap.set("n", "<leader>Rj", ":res +5<CR>")
-vim.keymap.set("n", "<leader>Rh", ":vertical res -5<CR>")
-vim.keymap.set("n", "<leader>Rl", ":vertical res +5<CR>")
-
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<C-f>", "<C-f>zz")
-vim.keymap.set("n", "<C-b>", "<C-b>zz")
-
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
-vim.keymap.set("x", "<leader>p", '"_dP')
-vim.keymap.set("n", "<leader>d", '"_d')
-vim.keymap.set("v", "<leader>d", '"_d')
-
-vim.keymap.set("n", "<leader>y", '"+y')
-vim.keymap.set("v", "<leader>y", '"+y')
-vim.keymap.set("n", "<leader>Y", '"+Y')
-
-vim.keymap.set("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>")
-vim.keymap.set("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>")
-
-vim.keymap.set("n", "<leader>wv", "<cmd> vsplit<CR>")
-vim.keymap.set("n", "<leader>wh", "<cmd> split<CR>")
-
-vim.keymap.set("n", "<leader>bn", "<cmd> bnext<CR>")
-vim.keymap.set("n", "<leader>bp", "<cmd> bprev<CR>")
-vim.keymap.set("n", "<leader>bd", "<cmd> bdelete<CR>")
-
-vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
 
 --require("set")
 vim.opt.nu = true
