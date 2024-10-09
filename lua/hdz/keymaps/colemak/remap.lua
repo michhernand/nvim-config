@@ -26,3 +26,5 @@ vim.keymap.set('n', '<C-n>', '<C-j>', { noremap = true, desc = "Move to lower wi
 vim.keymap.set('n', '<C-e>', '<C-e>', { noremap = true, desc = "Move to upper window" })
 vim.keymap.set('n', '<C-i>', '<C-i>', { noremap = true, desc = "Move to right window" })
 
+vim.keymap.set({"n", "x"}, "l", "i", { noremap = true })
+vim.keymap.set({"n", "x"}, "L", "I", { noremap = true })

@@ -13,7 +13,6 @@ return {
             print("which-key config failed!")
             return
         end
-        -- local wk = require("which-key")
         wk.register({
             ["<leader>t"] = {
                 name = "trouble",
