@@ -19,10 +19,10 @@ return {
             vim.keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
             vim.keymap.set({"n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
             vim.keymap.set("n", "gD", 
-                function()
-                    vim.lsp.buf.definition()
-                end,
-                opts
+            function()
+                vim.lsp.buf.definition()
+            end,
+            opts
             )
             vim.keymap.set("n", "gB", "<C-o>", { noremap = true, silent = true, desc = "Go back from definition" })
             vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
@@ -39,6 +39,31 @@ return {
         lspconfig["gopls"].setup({
             capabilities = capabilities,
             on_attach = on_attach
+        })
+
+        lspconfig.clangd.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            cmd = { "clangd", "--background-index" },
+            filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+            root_dir = function(fname)
+                return require('lspconfig.util').root_pattern(
+                'compile_commands.json',
+                'compile_flags.txt',
+                'configure.ac',
+                '.git'
+                )(fname) or vim.fn.getcwd()
+            end,
+            single_file_support = true,
+            settings = {
+                clangd = {
+                    arguments = {
+                        "--header-insertion=iwyu",
+                        "--suggest-missing-includes",
+                        "--completion-style=detailed"
+                    }
+                }
+            }
         })
 
         lspconfig["r_language_server"].setup({
@@ -66,49 +91,6 @@ return {
                     },
                 }
             }
-        })
-
-        lspconfig.metals.setup({
-            capabilities = capabilities,
-            on_attach = on_attach
-        })
-
-        -- Add Java configuration
-        lspconfig.jdtls.setup({
-            capabilities = capabilities,
-            on_attach = on_attach,
-            cmd = {'/opt/homebrew/bin/jdtls'},
-            root_dir = function(fname)
-                return require('lspconfig.util').root_pattern('pom.xml', 'gradle.build', '.git')(fname) or vim.fn.getcwd()
-            end,
-            settings = {
-                java = {
-                    signatureHelp = { enabled = true },
-                    contentProvider = { preferred = 'fernflower' },
-                    completion = {
-                        favoriteStaticMembers = {
-                            "org.hamcrest.MatcherAssert.assertThat",
-                            "org.hamcrest.Matchers.*",
-                            "org.junit.Assert.*",
-                            "java.util.Objects.requireNonNull",
-                            "java.util.Objects.requireNonNullElse",
-                            "org.mockito.Mockito.*"
-                        },
-                    },
-                    sources = {
-                        organizeImports = {
-                            starThreshold = 9999,
-                            staticStarThreshold = 9999,
-                        },
-                    },
-                    codeGeneration = {
-                        toString = {
-                            template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}"
-                        },
-                        useBlocks = true,
-                    },
-                }
-            },
         })
     end
 }
