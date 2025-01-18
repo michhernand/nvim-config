@@ -30,7 +30,6 @@ return {
 
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		-- Existing configurations
 		lspconfig["pyright"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach
@@ -77,7 +76,7 @@ return {
 		})
 
 		lspconfig.rust_analyzer.setup({
-			on_attach=on_attach,
+			on_attach = on_attach,
 			settings = {
 				["rust-analyzer"] = {
 					imports = {
@@ -97,5 +96,15 @@ return {
 				}
 			}
 		})
+
+		lspconfig.zls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			cmd = { "/path/to/zls" }, -- Replace with the path to your compiled zls binary
+			filetypes = { "zig" },
+			root_dir = lspconfig.util.root_pattern(".git", "build.zig", "zls.json"),
+			single_file_support = true
+		})
 	end
 }
+
