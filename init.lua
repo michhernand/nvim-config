@@ -68,6 +68,10 @@ vim.keymap.set("n", "<leader>bp", "<cmd> bprev<CR>")
 vim.keymap.set("n", "<leader>bd", "<cmd> bdelete<CR>")
 
 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
+-- views can only be fully collapsed with the global statusline
+
+vim.opt.laststatus = 3
+vim.opt.smartindent = false
 
 --require("set")
 vim.opt.nu = true
