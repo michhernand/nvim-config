@@ -4,11 +4,21 @@ end
 
 return {
 	"yetone/avante.nvim",
-        event = { "BufReadPost", "BufNewFile" },
+	event = { "BufReadPost", "BufNewFile" },
 	lazy = true,
 	version = false, -- set this if you want to always pull the latest change
 	opts = {
-		-- add any opts here
+		provider = "claude",
+		claude = {
+			-- endpoint = "https://api.anthropic.com/v1/messages",
+			model = "claude-3-7-sonnet-20250219",
+			max_tokens = 8192,
+			thinking = {
+				type = "disabled",
+				-- budget_tokens = 2048,
+			},
+			temperature = 1,
+		}
 	},
 	-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
 	build = "make",
