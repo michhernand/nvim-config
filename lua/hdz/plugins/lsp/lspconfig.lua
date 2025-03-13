@@ -30,16 +30,56 @@ return {
 
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
+		lspconfig.lua_ls.setup({
+			settings = {
+				Lua = {
+					runtime = {
+						version = 'LuaJIT',
+					},
+					diagnostics = {
+						globals = {'vim'},
+					},
+					workspace = {
+						library = vim.api.nvim_get_runtime_file("", true),
+						checkThirdParty = false, -- Disable third-party checking prompt
+					},
+					telemetry = {
+						enable = false,
+					},
+				},
+			},
+		})
+
+		-- Python
 		lspconfig["pyright"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach
 		})
 
+		-- Python
+		lspconfig["ruff"].setup({
+			init_options = {
+				settings = {
+					organizeImports = true,
+					fixAll = true,
+					lineLength = 88,
+					lint = {
+						enabled = true,
+						diagnosticMode = "openFilesOnly", -- or "workspace"
+						run = "onType", -- or "onSave"
+					}
+					-- Ruff language server settings go here
+				}
+			}
+		})
+
+		-- Go
 		lspconfig["gopls"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach
 		})
 
+		-- C++
 		lspconfig.clangd.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
@@ -65,38 +105,13 @@ return {
 			}
 		})
 
+		-- R
 		lspconfig["r_language_server"].setup({
 			capabilities = capabilities,
 			on_attach = on_attach
 		})
 
-		lspconfig["gdscript"].setup({
-			on_attach = on_attach,
-			filetypes = { "gd", "gdscript", "gdscript3" }
-		})
-
-		lspconfig.rust_analyzer.setup({
-			on_attach = on_attach,
-			settings = {
-				["rust-analyzer"] = {
-					imports = {
-						granularity = {
-							group = "module",
-						},
-						prefix = "self",
-					},
-					cargo = {
-						buildScripts = {
-							enable = true,
-						},
-					},
-					procMacro = {
-						enable = true
-					},
-				}
-			}
-		})
-
+		-- Zig
 		lspconfig.zls.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
