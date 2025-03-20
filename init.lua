@@ -1,3 +1,7 @@
+local function file_exists(name)
+   local f=io.open(name,"r")
+   if f~=nil then io.close(f) return true else return false end
+end
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -106,3 +110,21 @@ vim.opt.cursorline = true
 vim.lsp.set_log_level("debug")
 require('vim.lsp.log').set_format_func(vim.inspect)
 
+require("neotest").setup({
+  adapters = {
+    require("neotest-python")
+  }
+})
+
+local cwd = vim.loop.cwd()
+
+local py
+if file_exists(cwd .. "/.venv/bin/python") then
+	py = cwd .. "/.venv/bin/python"
+elseif file_exists(cwd .. "/venv/bin/python") then
+	py = cwd .. "/venv/bin/python"
+else
+	py = "/opt/homebrew/bin/python3.13"
+end
+
+require("dap-python").setup(py)
