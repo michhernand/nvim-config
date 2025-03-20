@@ -19,16 +19,18 @@ return {
 	      }
 
 	      dap.configurations.python = {
-		      type = "debugpy",
-		      request = "launch",
-		      name = "debugpy",
-		      program = "${file}", -- Missing required field
-		      pythonPath = function()
-			      return vim.fn.exepath("python")
-		      end,
-		      projectDir = "${workspaceFolder}",
-		      exitAfterTaskReturns = false,
-		      debugAutoInterpretAllModules = false,
+		      {
+			      type = "debugpy",
+			      request = "launch",
+			      name = "debugpy",
+			      program = "${file}", -- Missing required field
+			      pythonPath = function()
+				      return vim.fn.exepath("python")
+			      end,
+			      projectDir = "${workspaceFolder}",
+			      exitAfterTaskReturns = false,
+			      debugAutoInterpretAllModules = false,
+		      }
 	      }
       end
 
