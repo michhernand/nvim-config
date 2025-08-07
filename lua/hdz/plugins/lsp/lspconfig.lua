@@ -24,6 +24,12 @@ return {
 
 		local r = require("hdz.lsp.servers.r")
 		r.setup(lspconfig, on_attach.on_attach, capabilities)
+
+		local gdscript = require("hdz.lsp.servers.godot")
+		gdscript.setup(lspconfig, on_attach.on_attach, capabilities)
+
+		local gdshader = require("hdz.lsp.servers.gdshader")
+		gdshader.setup(lspconfig, on_attach.on_attach, capabilities)
 	end
 }
 

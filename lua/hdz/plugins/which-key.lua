@@ -22,39 +22,15 @@ return {
 			{"<leader>Rl", desc="right 5"},
 
 			{"<leader>t", group="trouble"},
-			{"<leader>tt", desc="toggle"},
-			{"<leader>tT", desc="buffer diagnostics"},
-			{"<leader>ts", desc="symbols"},
-			{"<leader>tl", desc="lsp definitions"},
-			{"<leader>tL", desc="location list"},
-			{"<leader>tQ", desc="quickfix list"},
 
-			{"<leader>h", group="harpoon"},
-			{"<leader>hm", desc="menu"},
-			{"<leader>hk", desc="add file"},
-			{"<leader>hn", desc="nav next"},
-			{"<leader>hp", desc="nav prev"},
 
-			{"<leader>f", group="telescope"},
-			{"<leader>ff", desc="find files"},
-			{"<leader>fg", desc="live grep"},
-			{"<leader>fb", desc="find buffers"},
-			{"<leader>fh", desc="find help tags"},
-			{"<leader>fs", desc="in-file grep"},
+			{"<leader>f", group="snacks"},
 
-			{"<leader>G", desc="lazygit"},
+			{"<leader>G", desc="git"},
 
 			{"<leader>d", desc="delete (keep register)"},
 			{"<leader>y", desc="yank (system clipboard)"},
 			{"<leader>Y", desc="yank line (system clipboard)"},
-
-			{"<leader>r", group="refactoring"},
-			{"<leader>re", desc="extract"},
-			{"<leader>rf", desc="extract to file"},
-			{"<leader>rv", desc="extract variable"},
-			{"<leader>ri", desc="inline variable"},
-			{"<leader>rb", desc="extract block"},
-			{"<leader>rg", desc="extract block to file"},
 
 			{"<leader>w", group="split"},
 			{"<leader>wv", desc="vertical"},
@@ -72,11 +48,6 @@ return {
 			{"<leader>n", group="roam"},
 
 			{"<leader>X", group="RLDX"},
-			{"<leader>Xa", desc="add"},
-			{"<leader>Xd", desc="delete"},
-			{"<leader>Xp", desc="properties"},
-			{"<leader>Xl", desc="load"},
-			{"<leader>Xs", desc="save"},
 
 			{"<leader>D", group="dap"},
 			{"<leader>Dm", desc="test method"},

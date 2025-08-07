@@ -3,9 +3,6 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
     bigfile = { enabled = true },
     dashboard = { enabled = true },
     indent = { enabled = true },
@@ -15,5 +12,15 @@ return {
     scroll = { enabled = false },
     statuscolumn = { enabled = true },
     words = { enabled = true },
+    lazygit = { enabled = true },
+    picker = { enabled = true},
   },
+
+  keys = {
+	  { "<leader>ff", function() Snacks.picker.smart() end, desc = "Smart Picker"},
+	  { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffer Picker"},
+	  { "<leader>fg", function() Snacks.picker.grep() end, desc = "Grep"},
+	  { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer"},
+	  { "<leader>G", function () Snacks.lazygit() end, desc = "Git"}
+  }
 }

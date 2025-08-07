@@ -1,15 +1,10 @@
-local function file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
-end
-
 local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
-  callback = function()
-   require('go.format').gofmt()
-  end,
-  group = format_sync_grp,
+	pattern = "*.go",
+	callback = function()
+		require('go.format').gofmt()
+	end,
+	group = format_sync_grp,
 })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -29,19 +24,17 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
 require("lazy").setup({
-    {import = "hdz.plugins"},
-    {import = "hdz.plugins.lsp"},
-    {import = "hdz.plugins.colorscheme"},
-    {import = "hdz.plugins.git"},
-    {import = "hdz.plugins.ide"},
-    {import = "hdz.plugins.ui"},
-    {import = "hdz.plugins.dap"},
+	{import = "hdz.plugins"},
+	{import = "hdz.plugins.lsp"},
+	{import = "hdz.plugins.colorscheme"},
+	{import = "hdz.plugins.ide"},
+	{import = "hdz.plugins.dap"},
 })
 
 if os.getenv("NEOVIM_ENV") ~= "server" then
-    vim.cmd.colorscheme("tokyonight-night")
-    -- vim.cmd.colorscheme("gruvbox")
-    -- vim.o.background = "light"
+	vim.cmd.colorscheme("tokyonight-night")
+	-- vim.cmd.colorscheme("gruvbox")
+	-- vim.o.background = "light"
 end
 
 -- require("remap")
@@ -82,12 +75,10 @@ vim.keymap.set("n", "<leader>bp", "<cmd> bprev<CR>")
 vim.keymap.set("n", "<leader>bd", "<cmd> bdelete<CR>")
 
 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
--- views can only be fully collapsed with the global statusline
 
 vim.opt.laststatus = 3
 vim.opt.smartindent = false
 
---require("set")
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -110,21 +101,3 @@ vim.opt.cursorline = true
 vim.lsp.set_log_level("debug")
 require('vim.lsp.log').set_format_func(vim.inspect)
 
-require("neotest").setup({
-  adapters = {
-    require("neotest-python")
-  }
-})
-
-local cwd = vim.loop.cwd()
-
-local py
-if file_exists(cwd .. "/.venv/bin/python") then
-	py = cwd .. "/.venv/bin/python"
-elseif file_exists(cwd .. "/venv/bin/python") then
-	py = cwd .. "/venv/bin/python"
-else
-	py = "/opt/homebrew/bin/python3.13"
-end
-
-require("dap-python").setup(py)

@@ -5,6 +5,6 @@ return
        },
        event = { "BufReadPost", "BufNewFile" },
        config = function()
-           require("lualine").setup()
+           require("lua.hdz.plugins.lualine").setup()
        end
     }
