@@ -1,3 +1,5 @@
+local extras_ok, extras = pcall(require, "extras.trouble")
+
 local qf_list_filepath = vim.fn.stdpath("data") .. "/qflist.json"
 
 return {
@@ -15,21 +17,39 @@ return {
 		}
 	},
 	cmd = "Trouble",
-	keys = {
-		{
-			"<leader>tt",
+	config = function()
+		local opts = {
+			auto_open = false,
+			auto_jump = false,
+			auto_preview = false,
+			auto_refresh = true,
+			max_items = 1000,
+			win = {
+				size = 0.4
+			}
+		}
+
+		if extras_ok and extras.before then
+			extras.before(opts)
+		end
+
+		local Trouble = require "trouble"
+		Trouble.setup(opts)
+
+		vim.keymap.set(
+			"n", "<leader>tt",
 			"<cmd>Trouble diagnostics toggle<cr>",
-			desc = "Diagnostics (Trouble)",
-		},
+			{ desc = "Trouble Diagnostics" }
+		)
 
-		{
-			"<leader>tT",
+		vim.keymap.set(
+			"n", "<leader>tT",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-			desc = "Buffer Diagnostics (Trouble)",
-		},
+			{ desc = "Trouble Buffer Diagnostics" }
+		)
 
-		{
-			"<leader>ts",
+		vim.keymap.set(
+			"n", "<leader>ts",
 			function()
 				local qf_items = vim.fn.getqflist()
 				for _, item in ipairs(qf_items) do
@@ -43,11 +63,11 @@ return {
 					qf_list_filepath
 				)
 			end,
-			desc = "Save QF List",
-		},
+			{ desc = "Save QF List" }
+		)
 
-		{
-			"<leader>tl",
+		vim.keymap.set(
+			"n", "<leader>tl",
 			function()
 				if vim.fn.filereadable(qf_list_filepath) == 1 then
 					local data = vim.fn.readfile(qf_list_filepath)
@@ -55,13 +75,18 @@ return {
 					vim.fn.setqflist(restored)
 				end
 			end,
-			desc = "Load QF List",
-		},
+			{ desc = "Load QF List" }
+		)
 
-		{
-			"<leader>tq",
+		vim.keymap.set(
+			"n", "<leader>tq",
 			"<cmd>Trouble qflist toggle<cr>",
-			desc = "Quickfix List (Trouble)",
-		},
-	},
+			{ desc = "View QF List" }
+		)
+
+		if extras_ok and extras.after then
+			extras.after(opts, Trouble)
+		end
+
+	end,
 }
