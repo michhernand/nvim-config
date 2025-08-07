@@ -1,3 +1,12 @@
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*.go",
+	callback = function()
+		require('go.format').gofmt()
+	end,
+	group = format_sync_grp,
+})
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
 	vim.fn.system({
@@ -14,20 +23,15 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-require("lazy").setup({
-    {import = "hdz.plugins"},
-    {import = "hdz.plugins.lsp"},
-    {import = "hdz.plugins.colorscheme"},
-    {import = "hdz.plugins.git"},
-    {import = "hdz.plugins.ide"},
-    {import = "hdz.plugins.ui"},
-})
+vim .opt.termguicolors = true
 
-if os.getenv("NEOVIM_ENV") ~= "server" then
-    -- vim.cmd.colorscheme("tokyonight-night")
-    vim.cmd.colorscheme("gruvbox")
-    vim.o.background = "light"
-end
+require("lazy").setup({
+	{import = "hdz.plugins"},
+	{import = "hdz.plugins.lsp"},
+	{import = "hdz.plugins.colorscheme"},
+	{import = "hdz.plugins.ide"},
+	{import = "hdz.plugins.dap"},
+})
 
 -- require("remap")
 vim.keymap.set("n", "<leader>Rk", ":res -5<CR>")
@@ -54,8 +58,10 @@ vim.keymap.set("n", "<leader>y", '"+y')
 vim.keymap.set("v", "<leader>y", '"+y')
 vim.keymap.set("n", "<leader>Y", '"+Y')
 
-vim.keymap.set("n", "<C-h>", "<cmd> TmuxNavigateLeft<CR>")
-vim.keymap.set("n", "<C-l>", "<cmd> TmuxNavigateRight<CR>")
+vim.keymap.set("n", "<C-h>", "<C-w>h", { silent = true })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { silent = true })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { silent = true })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { silent = true })
 
 vim.keymap.set("n", "<leader>wv", "<cmd> vsplit<CR>")
 vim.keymap.set("n", "<leader>wh", "<cmd> split<CR>")
@@ -66,14 +72,16 @@ vim.keymap.set("n", "<leader>bd", "<cmd> bdelete<CR>")
 
 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end)
 
---require("set")
+vim.opt.laststatus = 3
+vim.opt.smartindent = false
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+vim.opt.tabstop = 8
+vim.opt.softtabstop = 8
+vim.opt.shiftwidth = 8
+vim.opt.expandtab = false
 
 vim.opt.smartindent = true
 
@@ -86,8 +94,6 @@ vim.opt.scrolloff = 8
 
 vim.opt.cursorline = true
 
-local config = {
-    cmd = {'/opt/homebrew/bin/jdtls'},
-    root_dir = vim.fs.dirname(vim.fs.find({'gradlew', '.git', 'mvnw'}, { upward = true })[1]),
-}
-require('jdtls').start_or_attach(config)
+vim.lsp.set_log_level("debug")
+require('vim.lsp.log').set_format_func(vim.inspect)
+

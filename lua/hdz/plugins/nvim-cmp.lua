@@ -22,21 +22,10 @@ return {
             local copilot_cmp = require("copilot_cmp")
             copilot_cmp.setup(opts)
         end
-        -- attach cmp source whenever copilot attaches
-        -- fixes lazy-loading issues with the copilot cmp source
-        -- require("lazyvim.util").lsp.on_attach(function(client)
-        --   if client.name == "copilot" then
-        --     copilot_cmp._on_insert_enter({})
-        --   end
-        -- end)
 
         local cmp = require("cmp")
-
         local luasnip = require("luasnip")
-
         local lspkind = require("lspkind")
-
-        -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
         require("luasnip.loaders.from_vscode").lazy_load()
 
         local my_sources = {
@@ -44,6 +33,7 @@ return {
             { name = "luasnip" },
             { name = "buffer" },
             { name = "path" },
+	    { name = "cmp_rolodex"},
         }
 
         if os.getenv("DISABLE_COPILOT") ~= "true" then
@@ -59,6 +49,7 @@ return {
                 luasnip.lsp_expand(args.body)
             end,
         },
+
         mapping = cmp.mapping.preset.insert({
             ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
             ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
@@ -69,22 +60,27 @@ return {
             ["<CR>"] = cmp.mapping.confirm({ select = false }),
             -- ["C-h"] = function() vim.lsp.buf.signature_help() end
         }),
-        -- sources for autocompletion
         sources = cmp.config.sources(my_sources),
-        -- configure lspkind for vs-code like pictograms in completion menu
-        formatting = {
-            format = lspkind.cmp_format({
-                maxwidth = 50,
-                ellipsis_char = "...",
-            }),
-        },
+	formatting = {
+		format = function(entry, vim_item)
+			-- Get the user's formatting from lspkind
+			local format_func = lspkind.cmp_format({
+				maxwidth = 50,
+				ellipsis_char = "...",
+			})
+
+			-- Apply lspkind formatting first
+			vim_item = format_func(entry, vim_item)
+
+			-- Apply custom formatting only for cmp_rolodex
+			if entry.source.name == "cmp_rolodex" then
+				vim_item.kind = "📇 Contact" -- Override display
+				vim_item.menu = "[RLDX]" -- Ensure menu label is still set
+			end
+
+			return vim_item
+		end,
+	},
     })
-
-
-    -- local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-    -- cmp.event:on(
-    -- "confirm_done",
-    -- cmp_autopairs.on_confirm_done()
-    -- )
 end
 }
