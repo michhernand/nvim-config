@@ -29,8 +29,8 @@ return {
 			}
 		}
 
-		if extras_ok and extras and type(extras) == "table" and extras.before then
-			extras.before(opts)
+		if extras_ok and extras and extras.spec.before then
+			extras.spec.before(opts)
 		end
 
 		local Trouble = require "trouble"
@@ -84,8 +84,8 @@ return {
 			{ desc = "View QF List" }
 		)
 
-		if extras_ok and extras and type(extras) == "table" and extras.after then
-			extras.after(opts, Trouble)
+		if extras_ok and extras and extras.spec.after then
+			extras.spec.after(opts, Trouble)
 		end
 
 	end,

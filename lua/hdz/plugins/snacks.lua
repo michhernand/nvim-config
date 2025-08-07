@@ -20,7 +20,10 @@ return {
 		}
 
 		if extras_ok and extras and type(extras) == "table" and extras.before then
+			vim.notify("Executing Snacks 'before' hook")
 			extras.before(opts)
+		else
+			vim.notify("Snacks 'before' hook not found")
 		end
 
 		local Snacks = require "snacks"
@@ -57,7 +60,10 @@ return {
 		)
 
 		if extras_ok and extras and type(extras) == "table" and extras.after then
+			vim.notify("Executing Snacks 'after' hook")
 			extras.after(opts, Snacks)
+		else
+			vim.notify("Snacks 'after' hook not found")
 		end
 	end
 }
