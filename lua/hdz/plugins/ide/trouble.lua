@@ -29,7 +29,7 @@ return {
 			}
 		}
 
-		if extras_ok and extras.before then
+		if extras_ok and extras and type(extras) == "table" and extras.before then
 			extras.before(opts)
 		end
 
