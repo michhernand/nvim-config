@@ -84,7 +84,7 @@ return {
 			{ desc = "View QF List" }
 		)
 
-		if extras_ok and extras.after then
+		if extras_ok and extras and type(extras) == "table" and extras.after then
 			extras.after(opts, Trouble)
 		end
 
