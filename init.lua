@@ -23,6 +23,8 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+vim .opt.termguicolors = true
+
 require("lazy").setup({
 	{import = "hdz.plugins"},
 	{import = "hdz.plugins.lsp"},
@@ -30,12 +32,6 @@ require("lazy").setup({
 	{import = "hdz.plugins.ide"},
 	{import = "hdz.plugins.dap"},
 })
-
-if os.getenv("NEOVIM_ENV") ~= "server" then
-	vim.cmd.colorscheme("tokyonight-night")
-	-- vim.cmd.colorscheme("gruvbox")
-	-- vim.o.background = "light"
-end
 
 -- require("remap")
 vim.keymap.set("n", "<leader>Rk", ":res -5<CR>")
